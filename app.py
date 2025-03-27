@@ -1,4 +1,4 @@
-import json
+import json, os
 import logging
 from flask import Flask, jsonify, request
 
@@ -121,4 +121,5 @@ app = create_app()
 # This block is only used for debugging or local testing.
 # In production, run the app with a WSGI server like Gunicorn or uWSGI.
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
