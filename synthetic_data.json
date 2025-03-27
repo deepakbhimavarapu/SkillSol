@@ -1,0 +1,114 @@
+{
+    "organizations": [
+      {
+        "id": "org_001",
+        "name": "Org A"
+      },
+      {
+        "id": "org_002",
+        "name": "Org B"
+      }
+    ],
+    "teams": [
+      {
+        "id": "team_001",
+        "organization_id": "org_001",
+        "name": "Team Alpha"
+      },
+      {
+        "id": "team_002",
+        "organization_id": "org_001",
+        "name": "Team Beta"
+      },
+      {
+        "id": "team_003",
+        "organization_id": "org_002",
+        "name": "Team Gamma"
+      }
+    ],
+    "roles": [
+      {
+        "id": "role_001",
+        "team_id": "team_001",
+        "title": "Developer"
+      },
+      {
+        "id": "role_002",
+        "team_id": "team_001",
+        "title": "Tester"
+      },
+      {
+        "id": "role_003",
+        "team_id": "team_002",
+        "title": "Manager"
+      },
+      {
+        "id": "role_004",
+        "team_id": "team_003",
+        "title": "Designer"
+      }
+    ],
+    "individuals": [
+      {
+        "id": "ind_001",
+        "team_id": "team_001",
+        "role_id": "role_001",
+        "name": "Alice"
+      },
+      {
+        "id": "ind_002",
+        "team_id": "team_001",
+        "role_id": "role_002",
+        "name": "Bob"
+      },
+      {
+        "id": "ind_003",
+        "team_id": "team_002",
+        "role_id": "role_003",
+        "name": "Charlie"
+      },
+      {
+        "id": "ind_004",
+        "team_id": "team_003",
+        "role_id": "role_004",
+        "name": "Dana"
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill_001",
+        "name": "Python"
+      },
+      {
+        "id": "skill_002",
+        "name": "JavaScript"
+      },
+      {
+        "id": "skill_003",
+        "name": "SQL"
+      }
+    ],
+    "benchmarks": {
+      "Technology": [
+        {
+          "metric": "productivity",
+          "value": 85
+        },
+        {
+          "metric": "quality",
+          "value": 90
+        }
+      ],
+      "Finance": [
+        {
+          "metric": "productivity",
+          "value": 80
+        },
+        {
+          "metric": "quality",
+          "value": 88
+        }
+      ]
+    }
+  }
+  
