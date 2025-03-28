@@ -112,6 +112,47 @@ def create_app():
         if industry:
             return jsonify(benchmarks.get(industry, []))
         return jsonify(benchmarks)
+    
+    @app.route('/skillgap', methods=['GET'])
+    def get_skill_gap():
+        org_id = request.args.get('org_id')
+        if not org_id:
+            return jsonify({"error": "org_id parameter is required"}), 400
+
+        # Find the organization with the given ID
+        org = next((o for o in organizations if o['id'] == org_id), None)
+        if not org:
+            return jsonify({"error": "Organization not found"}), 404
+
+        # Ensure the organization has an industry field
+        if 'industry' not in org:
+            return jsonify({"error": "Organization does not have an industry field"}), 400
+
+        org_industry = org['industry']
+
+        # Get all teams for the organization
+        org_teams = [t for t in teams if t['organization_id'] == org_id]
+        expected_skills_set = set()
+
+        # For each team, accumulate expected skills from all roles
+        for team in org_teams:
+            team_roles = [r for r in roles if r['team_id'] == team['id']]
+            for role in team_roles:
+                # Expecting each role to have an "expected_skills" field (list of skill IDs)
+                role_skills = role.get('expected_skills', [])
+                expected_skills_set.update(role_skills)
+
+        # Get benchmark skills for the organization's industry
+        benchmark_skills = benchmarks.get(org_industry, [])
+        benchmark_skills_set = set(benchmark_skills)
+
+        # Calculate the gap: skills expected but missing from the benchmark
+        gap_skill_ids = benchmark_skills_set - expected_skills_set
+
+        # Retrieve the skill objects for each missing skill
+        gap_skills = [s for s in skills if s['id'] in gap_skill_ids]
+
+        return jsonify(gap_skills)
 
     return app
 
